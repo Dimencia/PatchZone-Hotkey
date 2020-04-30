@@ -1,0 +1,6 @@
+<PatchZoneManifest>
+	<Guid>55fae239-3748-4234-88a2-4461508d7455</Guid>
+	<Icon></Icon>
+	<DisplayName>PatchZone Hotkey</DisplayName>
+	<Description>Sets F11 as a hotkey to open PatchZone from main menu</Description>
+</PatchZoneManifest>
