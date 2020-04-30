@@ -22,7 +22,7 @@ namespace PatchZoneHotkey
         private static string path = $"{workingDir}{Path.DirectorySeparatorChar}PatchZone.GUI.exe";
         public static void Postfix(UIBase __instance)
         {
-            if (__instance is UIMainMenu menu && !done)
+            if (!done && __instance is UIMainMenu menu)
             {
                 // It takes some time for localization to kick in, so we basically retry every tick until it's English
                 // If it's not ever English, this never works, which is probalby better than having one english button
@@ -30,7 +30,7 @@ namespace PatchZoneHotkey
 
                 // This is super messy but meh.  It works I guess.
 
-                var components = menu.gameObject.GetComponentsInChildren<Component>();
+                var components = menu.gameObject.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
 
                 // The structure is something like: 
                 // Main Form
@@ -43,36 +43,35 @@ namespace PatchZoneHotkey
 
                 // And yes, I spent ... too much time with debug messages trying to get that layout and that's the best I've got
 
-                foreach (var c in components)
+                foreach (var tmp in components)
                 {
-                    if (c is TMPro.TextMeshProUGUI tmp)
+                    if (tmp.text == "Quit Game")
                     {
-                        if (tmp.text == "Quit Game")
+                        // We want to duplicate its parent's gameobject, into its parent's parent...
+                        // So first, make a copy and put it there
+
+                        var duplicate = UnityEngine.Object.Instantiate(tmp.transform.parent.gameObject, tmp.transform.parent.parent);
+                        // We'll make the old one for mods, the new one is Quit since it's going at the bottom
+                        tmp.text = "Mod Setup";
+
+                        // I think a transform is unnecessary because they're in a layout container, but haven't tested removing this yet, I'm tired
+                        RectTransform rt = duplicate.GetComponent<RectTransform>();
+                        duplicate.transform.localPosition = new Vector3(duplicate.transform.localPosition.x, duplicate.transform.localPosition.y - rt.sizeDelta.y, duplicate.transform.localPosition.z);
+                        PatchZoneHotkey.Context.Log.Log(duplicate.GetType().ToString());
+
+                        tmp.transform.parent.GetComponent<GMButton>().onClick.RemoveAllListeners();
+                        tmp.transform.parent.GetComponent<GMButton>().onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
                         {
-                            // We want to duplicate its parent's gameobject, into its parent's parent...
-                            // So first, make a copy and put it there
+                            var temp = Environment.CurrentDirectory;
+                            Environment.CurrentDirectory = workingDir;
+                            Process.Start(path);
+                            Environment.CurrentDirectory = temp;
 
-                            var duplicate = UnityEngine.Object.Instantiate(tmp.transform.parent.gameObject, tmp.transform.parent.parent);
-                            // We'll make the old one for mods, the new one is Quit since it's going at the bottom
-                            tmp.text = "Mod Setup";
-
-                            // I think a transform is unnecessary because they're in a layout container, but haven't tested removing this yet, I'm tired
-                            RectTransform rt = duplicate.GetComponent<RectTransform>();
-                            duplicate.transform.localPosition = new Vector3(duplicate.transform.localPosition.x, duplicate.transform.localPosition.y - rt.sizeDelta.y, duplicate.transform.localPosition.z);
-                            PatchZoneHotkey.Context.Log.Log(duplicate.GetType().ToString());
-
-                            tmp.transform.parent.GetComponent<GMButton>().onClick.RemoveAllListeners();
-                            tmp.transform.parent.GetComponent<GMButton>().onClick.AddListener(new UnityEngine.Events.UnityAction(() =>
-                            {
-                                var temp = Environment.CurrentDirectory;
-                                Environment.CurrentDirectory = workingDir;
-                                Process.Start(path);
-                                Environment.CurrentDirectory = temp;
-
-                            }));
-                            done = true;
-                        }
+                        }));
+                        done = true;
+                        break;
                     }
+
                 }
             }
 
