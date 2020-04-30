@@ -1,15 +1,18 @@
 # PathZone Hotkey - EndZone a World apart mod
-PathZone Hotkey is a mod for EndZone a World apart survival city builder game ([Endzone-Game.com](https://endzone-game.com/)).
+PatchZone Hotkey is a mod for EndZone a World apart survival city builder game ([Endzone-Game.com](https://endzone-game.com/)).
 
 # Features
-TODO: Add features
+Allows you to press the "Hide UI" key from the main menu to open PatchZone.  
+
+Remember to restart EndZone after making any changes.  This is just to make it so you don't have to hunt for the exe to update or adjust mods
 
 # Installation
-1) Fist of all you need to obtain mod loader PatchZone. To get it follow [Installation guide](https://github.com/InflexCZE/PatchZone#installation).
-2) Start PatchZone and add PathZone Hotkey to the "Active mods" list.
+1) Obtain Inflex's mod loader PatchZone: [Installation guide](https://github.com/InflexCZE/PatchZone#installation).
+2) Unzip contents of the [Current Release](https://github.com/Dimencia/PatchZone-Hotkey/releases) to PatchZone/Mods in your EndZone directory
+2) Start PatchZone and add "PatchZone Hotkey" to the "Active mods" list.
 
 # Disclamer
-PathZone Hotkey can make the game unstable and/or crash.
+Like any mod, PathZone Hotkey can make the game unstable and/or crash.
 Edited worlds may get corrupted after save and/or may not function properly when switched back to survival.
 Loading PathZone Hotkey to version of the game it is not released for is not advised. It is likely that it will not load and/or not function properly.
 
