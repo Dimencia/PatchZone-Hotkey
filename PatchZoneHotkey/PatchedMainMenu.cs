@@ -32,6 +32,17 @@ namespace PatchZoneHotkey
 
                 var components = menu.gameObject.GetComponentsInChildren<Component>();
 
+                // The structure is something like: 
+                // Main Form
+                //      An arbitrary number of other containers (I think just like 3 though)
+                //          A container that sets up a FlowLayout on the 'labels'
+                //              Multiple "Label" containers, each of which has
+                //                  A TMPro object and a Unity Button or GMButton
+
+                // So from our TMPro object, we're duplicating its parent and puttig it into its parent's parent
+
+                // And yes, I spent ... too much time with debug messages trying to get that layout and that's the best I've got
+
                 foreach (var c in components)
                 {
                     if (c is TMPro.TextMeshProUGUI tmp)
