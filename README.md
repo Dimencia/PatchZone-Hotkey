@@ -1,4 +1,4 @@
-# PathZone Hotkey - EndZone a World apart mod
+# PatchZone Hotkey - EndZone a World apart mod
 PatchZone Hotkey is a mod for EndZone a World apart survival city builder game ([Endzone-Game.com](https://endzone-game.com/)).
 
 # Features
