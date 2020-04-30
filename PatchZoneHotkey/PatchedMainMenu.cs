@@ -56,6 +56,7 @@ namespace PatchZoneHotkey
                             // We'll make the old one for mods, the new one is Quit since it's going at the bottom
                             tmp.text = "Mod Setup";
 
+                            // I think a transform is unnecessary because they're in a layout container, but haven't tested removing this yet, I'm tired
                             RectTransform rt = duplicate.GetComponent<RectTransform>();
                             duplicate.transform.localPosition = new Vector3(duplicate.transform.localPosition.x, duplicate.transform.localPosition.y - rt.sizeDelta.y, duplicate.transform.localPosition.z);
                             PatchZoneHotkey.Context.Log.Log(duplicate.GetType().ToString());
