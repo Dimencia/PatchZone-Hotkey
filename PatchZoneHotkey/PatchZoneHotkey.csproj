@@ -32,6 +32,9 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(GameRefsDir)UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(GameRefsDir)UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Zenject-usage">
       <HintPath>$(GameRefsDir)Zenject-usage.dll</HintPath>
     </Reference>

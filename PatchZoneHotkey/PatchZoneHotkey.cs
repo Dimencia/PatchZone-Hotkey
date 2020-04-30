@@ -10,6 +10,9 @@ using Service.Localization;
 using Service.Street;
 using Service.UserWorldTasks;
 using HarmonyLib;
+using System.Reflection;
+using UnityEngine;
+using UserInterface;
 
 namespace PatchZoneHotkey
 {
