@@ -16,18 +16,6 @@ namespace PatchZoneHotkey
     [HarmonyPatch(typeof(UIBase), "Tick")]
     class PatchedMainMenu
     {
-        public static Component CopyComponent(Component original, GameObject destination)
-        {
-            Type type = original.GetType();
-            Component copy = destination.AddComponent(type);
-            // Copied fields can be restricted with BindingFlags
-            System.Reflection.FieldInfo[] fields = type.GetFields();
-            foreach (System.Reflection.FieldInfo field in fields)
-            {
-                field.SetValue(copy, field.GetValue(original));
-            }
-            return copy;
-        }
 
         private static bool done = false;
         private static string workingDir = $"{Environment.CurrentDirectory}{Path.DirectorySeparatorChar}PatchZone";
@@ -37,7 +25,7 @@ namespace PatchZoneHotkey
             if (__instance is UIMainMenu menu && !done)
             {
                 // It takes some time for localization to kick in, so we basically retry every tick until it's English
-                // If it's not ever English, this never works
+                // If it's not ever English, this never works, which is probalby better than having one english button
                 // If we try to change it before it localizes, it forces it to match what its enum says it should be
 
                 // This is super messy but meh.  It works I guess.
@@ -50,7 +38,7 @@ namespace PatchZoneHotkey
                     {
                         if (tmp.text == "Quit Game")
                         {
-                            // We want to duplicate its parent's gameobject, into its parents parent...
+                            // We want to duplicate its parent's gameobject, into its parent's parent...
                             // So first, make a copy and put it there
 
                             var duplicate = UnityEngine.Object.Instantiate(tmp.transform.parent.gameObject, tmp.transform.parent.parent);
@@ -68,6 +56,7 @@ namespace PatchZoneHotkey
                                 Environment.CurrentDirectory = workingDir;
                                 Process.Start(path);
                                 Environment.CurrentDirectory = temp;
+
                             }));
                             done = true;
                         }
