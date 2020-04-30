@@ -2,7 +2,7 @@
 PatchZone Hotkey is a mod for EndZone a World apart survival city builder game ([Endzone-Game.com](https://endzone-game.com/)).
 
 # Features
-Allows you to press the "Hide UI" key from the main menu to open PatchZone.  
+Adds a button to the main menu to open PatchZone
 
 Remember to restart EndZone after making any changes.  This is just to make it so you don't have to hunt for the exe to update or adjust mods
 
