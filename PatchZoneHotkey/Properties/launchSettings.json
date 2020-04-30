@@ -7,6 +7,9 @@
       "commandName": "Executable",
       "executablePath": "C:\\Program Files (x86)\\Steam\\Steam.exe",
       "commandLineArgs": "-applaunch 933820"
+    },
+    "PatchZoneHotkey": {
+      "commandName": "Project"
     }
   }
 }
